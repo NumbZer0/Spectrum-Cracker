@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPECTRUM X MOD - Ativador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .status-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .status-inactive {
+            background: #dc3545;
+        }
+
+        .status-active {
+            background: #28a745;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .activate-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .activate-btn:active {
+            transform: translateY(0);
+        }
+
+        .activate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .features {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .feature-item.active {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .feature-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .feature-status {
+            font-size: 0.8em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #e9ecef;
+            color: #666;
+        }
+
+        .feature-status.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 0.8em;
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .credits {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🎮 SPECTRUM X</div>
+        <div class="subtitle">MOD ACTIVATOR BY GT & LIGHT 🫶</div>
+
+        <div class="status-box">
+            <div id="statusText">
+                <span class="status-indicator status-inactive" id="statusDot"></span>
+                <span id="statusLabel">MOD INATIVO</span>
+            </div>
+        </div>
+
+        <button class="activate-btn" id="activateBtn" onclick="activateMod()">
+            ⚡ ATIVAR MOD
+        </button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; color: #666;">Ativando...</p>
+        </div>
+
+        <div class="features" id="features">
+            <div class="feature-item" id="feature-aimbot">
+                <span class="feature-icon">🎯</span>
+                <span class="feature-name">Aimbot</span>
+                <span class="feature-status">Desativado</span>
+            </div>
+            <div class="feature-item" id="feature-aimbullet">
+                <span class="feature-icon">💣</span>
+                <span class="feature-name">Aim Bullet</span>
+                <span class="feature-status">Desativado</span>
+            </div>
+            <div class="feature-item" id="feature-risk">
+                <span class="feature-icon">⚠️</span>
+                <span class="feature-name">Risk Features</span>
+                <span class="feature-status">Desativado</span>
+            </div>
+        </div>
+
+        <div class="info-grid" id="infoGrid" style="display: none;">
+            <div class="info-item">
+                <div class="info-label">Versão</div>
+                <div class="info-value" id="version">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Expira em</div>
+                <div class="info-value" id="expiration">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Slots</div>
+                <div class="info-value" id="slots">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Device ID</div>
+                <div class="info-value" id="deviceId">-</div>
+            </div>
+        </div>
+
+        <div class="credits">
+            Desenvolvido com ❤️ por GT & LIGHT
+        </div>
+    </div>
+
+    <script>
+        // COLE AQUI A URL DO SEU GITHUB RAW
+        const CONFIG_URL = 'https://raw.githubusercontent.com/NumbZer0/Spectrum-Cracker/refs/heads/main/config.json';
+        
+        let modConfig = null;
+        let isActivated = false;
+
+        async function activateMod() {
+            const btn = document.getElementById('activateBtn');
+            const loading = document.getElementById('loading');
+            
+            // Desabilita botão e mostra loading
+            btn.disabled = true;
+            loading.classList.add('show');
+            
+            try {
+                // Baixa a configuração
+                const response = await fetch(CONFIG_URL);
+                const data = await response.json();
+                
+                if (!data.status) {
+                    throw new Error('Config desativada no servidor');
+                }
+                
+                modConfig = data.data;
+                
+                // Aguarda um pouco para efeito visual
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Ativa o mod
+                applyModConfig();
+                
+                // Atualiza interface
+                updateUI();
+                
+                isActivated = true;
+                
+                // Muda botão
+                btn.textContent = '✅ MOD ATIVADO';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                
+                // Mostra notificação
+                alert('🎉 MOD ATIVADO COM SUCESSO!\n\n' +
+                      `Mod: ${modConfig.modname}\n` +
+                      `Expira: ${modConfig.exdate}\n\n` +
+                      'Todas as features foram habilitadas!');
+                
+            } catch (error) {
+                alert('❌ Erro ao ativar MOD:\n' + error.message);
+                btn.disabled = false;
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+
+        function applyModConfig() {
+            // Aqui você coloca o código que realmente ativa as features
+            // Exemplo: injetar scripts, modificar variáveis do jogo, etc.
+            
+            console.log('🎮 Aplicando configuração do MOD...');
+            console.log('Config completa:', modConfig);
+            
+            // Simula ativação de features
+            if (modConfig.aimbot_fiture === 1) {
+                console.log('🎯 Aimbot ativado');
+                window.AIMBOT_ENABLED = true;
+            }
+            
+            if (modConfig.aimbullet_fiture === 1) {
+                console.log('💣 Aim Bullet ativado');
+                window.AIMBULLET_ENABLED = true;
+            }
+            
+            if (modConfig.risk_fiture === 1) {
+                console.log('⚠️ Risk Features ativadas');
+                window.RISK_ENABLED = true;
+            }
+            
+            // Salva config no localStorage
+            localStorage.setItem('modConfig', JSON.stringify(modConfig));
+            localStorage.setItem('modActivated', 'true');
+        }
+
+        function updateUI() {
+            // Atualiza status
+            document.getElementById('statusDot').className = 'status-indicator status-active';
+            document.getElementById('statusLabel').textContent = 'MOD ATIVO';
+            
+            // Atualiza features
+            updateFeature('aimbot', modConfig.aimbot_fiture === 1);
+            updateFeature('aimbullet', modConfig.aimbullet_fiture === 1);
+            updateFeature('risk', modConfig.risk_fiture === 1);
+            
+            // Mostra informações
+            document.getElementById('infoGrid').style.display = 'grid';
+            document.getElementById('version').textContent = 'v' + modConfig.version;
+            document.getElementById('expiration').textContent = modConfig.EXP;
+            document.getElementById('slots').textContent = modConfig.BHATIA_SLOT;
+            document.getElementById('deviceId').textContent = modConfig.devices.substring(0, 8) + '...';
+        }
+
+        function updateFeature(name, isActive) {
+            const element = document.getElementById('feature-' + name);
+            const status = element.querySelector('.feature-status');
+            
+            if (isActive) {
+                element.classList.add('active');
+                status.textContent = 'Ativo';
+                status.classList.add('active');
+            }
+        }
+
+        // Verifica se já estava ativado ao carregar a página
+        window.addEventListener('load', () => {
+            const wasActivated = localStorage.getItem('modActivated');
+            const savedConfig = localStorage.getItem('modConfig');
+            
+            if (wasActivated === 'true' && savedConfig) {
+                modConfig = JSON.parse(savedConfig);
+                isActivated = true;
+                
+                const btn = document.getElementById('activateBtn');
+                btn.textContent = '✅ MOD ATIVADO';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                btn.disabled = true;
+                
+                updateUI();
+            }
+        });
+    </script>
+</body>
+</html>
